@@ -104,7 +104,7 @@ describe("server.js", () => {
       expect(res.status).toBe(400);
     }, 750);
     test("[11] responds with a 400 and proper error if budget cannot be coerced into a number", async () => {
-      const invalid1 = { name: "foo", budget: "NaN" };
+      const invalid1 = { name: "foo", budget: NaN };
       const invalid2 = { name: "foo", budget: "aaa" };
       let res = await request(server).post("/api/accounts").send(invalid1);
       expect(res.body.message).toMatch(/must be a number/i);
@@ -183,7 +183,7 @@ describe("server.js", () => {
       expect(res.status).toBe(400);
     }, 750);
     test("[19] responds with a 400 and proper error if budget cannot be coerced into a number", async () => {
-      const invalid1 = { name: "foo", budget: "NaN" };
+      const invalid1 = { name: "foo", budget: NaN };
       const invalid2 = { name: "foo", budget: "aaa" };
       let res = await request(server).put("/api/accounts/1").send(invalid1);
       expect(res.body.message).toMatch(/must be a number/i);
