@@ -2,9 +2,13 @@ const db = require("../../data/db-config");
 
 exports.checkAccountPayload = (req, res, next) => {
   const { name, budget } = req.body;
-  if (!name || !budget) {
+  if (name === "Bob") {
+    console.log(budget);
+  }
+  if (!name || budget === undefined) {
     return next({ status: 400, message: "name and budget are required" });
   }
+
   if (name.trim().length < 3 || name.trim().length > 100) {
     return next({
       status: 400,
@@ -12,7 +16,7 @@ exports.checkAccountPayload = (req, res, next) => {
     });
   }
   const budgetNumber = Number(budget);
-  if (isNaN(budgetNumber)) {
+  if (isNaN(budgetNumber) || budget === null) {
     return next({ status: 400, message: "budget of account must be a number" });
   }
   if (budget < 0 || budget > 1000000) {
